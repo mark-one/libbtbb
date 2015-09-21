@@ -239,6 +239,7 @@ unsigned lell_get_channel_index(const lell_packet *pkt);
 unsigned lell_get_channel_k(const lell_packet *pkt);
 const char * lell_get_adv_type_str(const lell_packet *pkt);
 void lell_print(const lell_packet *pkt);
+void lell_print_addr(const lell_packet *pkt);
 
 typedef struct lell_pcapng_handle lell_pcapng_handle;
 /* create a PCAPNG file for LE captures */

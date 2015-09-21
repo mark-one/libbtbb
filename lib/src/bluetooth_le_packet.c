@@ -333,6 +333,13 @@ const char * lell_get_adv_type_str(const lell_packet *pkt)
 	return "UNKNOWN";
 }
 
+static void _dump_addr_simple(const char *name, const uint8_t *buf, int offset, int random) {
+	int i;
+	printf("%s%02X", name, buf[offset+5]);
+	for (i = 4; i >= 0; --i)
+		printf("%02X", buf[offset+i]);
+}
+
 static void _dump_addr(const char *name, const uint8_t *buf, int offset, int random) {
 	int i;
 	printf("    %s%02x", name, buf[offset+5]);
@@ -487,6 +494,17 @@ print128:
 		}
 		pos += sublen;
 	}
+}
+
+void lell_print_addr(const lell_packet *pkt)
+{
+	int i;
+	switch(pkt->adv_type) {
+		case ADV_IND:
+			_dump_addr_simple("", pkt->symbols, 6, pkt->adv_tx_add);
+		default:
+			break;
+	}	
 }
 
 void lell_print(const lell_packet *pkt)
